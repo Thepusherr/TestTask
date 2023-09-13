@@ -1,4 +1,4 @@
-# Test Task: ()
+# Test Task: (https://circlepos.com/jobs/)
 # 1. Take each digit, from left to right and multiply them alternatively by 1 and 3
 # 2. Sum those numbers
 # 3. Take mod 10 of the summed figure

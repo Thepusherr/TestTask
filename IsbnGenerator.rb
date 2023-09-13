@@ -6,6 +6,8 @@ class IsbnGenerator
   private
 
   def converted_number(number)
+    number = number.gsub(/\D/, '')
+
     raise "Wrong number!" unless number.is_a? Integer
 
     number.to_s.split("").map.with_index { |digit, index| index.even? ? digit.to_i : digit.to_i * 3 }.sum

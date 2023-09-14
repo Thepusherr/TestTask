@@ -1,3 +1,5 @@
+require 'active_support'
+
 class IsbnGenerator
   def initialize(params = {})
     converted_number(params[:number])
@@ -6,11 +8,13 @@ class IsbnGenerator
   private
 
   def converted_number(number)
-    raise "Wrong number!" unless number.is_a? Integer
+    number = number.to_s.gsub(/\D/, '')
 
-    number.to_s.split("").map.with_index { |digit, index| index.even? ? digit.to_i : digit.to_i * 3 }.sum
+    raise "Wrong number!" if number.blank? || number.length != 12
+
+    number.split("").map.with_index { |digit, index| index.even? ? digit.to_i : digit.to_i * 3 }.sum
     sum = number.to_s.split("").map.with_index { |digit, index| index.even? ? digit.to_i : digit.to_i * 3 }.sum
-    p res = number.to_s + ((10 - (sum % 10)) % 10).to_s
+    p "#{number}#{((10 - (sum % 10)) % 10)}"
   end
 end
 

@@ -1,18 +1,15 @@
-class IsbnGenerator
-  def initialize(params = {})
-    converted_number(params[:number])
-  end
+require 'active_support'
 
-  private
-
-  def converted_number(number)
+class IsbnConverter
+  def convert_to_isbn13(number)
     number = number.to_s.gsub(/\D/, '')
 
     raise "Wrong number!" if number.blank? || number.length != 12
 
     sum = number.to_s.split("").map.with_index { |digit, index| index.even? ? digit.to_i : digit.to_i * 3 }.sum
-    p "#{number}#{((10 - (sum % 10)) % 10)}"
+    "#{number}#{((10 - (sum % 10)) % 10)}".to_i
   end
 end
 
-IsbnGenerator.new(number: 978014300723)
+isbn_converter = IsbnConverter.new
+p isbn_converter.convert_to_isbn13(978014300723)

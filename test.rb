@@ -1,5 +1,5 @@
 require 'rspec/autorun'
-require_relative 'isbn_generator.rb'
+require_relative 'isbn_converter.rb'
 
 describe Calculator do
     it "add two numbers" do

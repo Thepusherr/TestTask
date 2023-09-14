@@ -1,5 +1,3 @@
-require 'active_support'
-
 class IsbnGenerator
   def initialize(params = {})
     converted_number(params[:number])

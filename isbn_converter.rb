@@ -1,10 +1,9 @@
-require 'active_support'
+class InvalidISBNError < StandardError
+end
 
 class IsbnConverter
   def convert_to_isbn13(number)
-    number = number.to_s.gsub(/\D/, '')
-
-    raise "Wrong number!" if number.blank? || number.length != 12
+    raise InvalidISBNError, "Value must be 12-digit number!" unless number.to_s =~ /^\d{12}$/
 
     sum = number.to_s.split("").map.with_index { |digit, index| index.even? ? digit.to_i : digit.to_i * 3 }.sum
     "#{number}#{((10 - (sum % 10)) % 10)}".to_i
